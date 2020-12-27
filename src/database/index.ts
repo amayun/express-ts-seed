@@ -11,6 +11,6 @@ const client = new Client({
 
 export default client;
 
-export async function initDb() {
+export async function initDb(): Promise<void> {
   await client.connect();
 }

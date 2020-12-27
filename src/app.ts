@@ -1,18 +1,18 @@
 import 'express-async-errors';
 import createError from 'http-errors';
-import express from 'express';
+import express, { Express } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import httpLogger from 'morgan';
 import sassMiddleware from 'node-sass-middleware';
 
-import './config/config';
+import './config/env';
 import { initDb } from './database';
 
 import router from './router';
 import errorHandler from './middlewares/errorHandler';
 
-export default async function getApp() {
+export default async function getApp(): Promise<Express> {
   await initDb();
   const app = express();
 

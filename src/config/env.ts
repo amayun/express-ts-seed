@@ -19,3 +19,7 @@ if (!DB_HOST) {
   logger.error('No database host specified. Set DB_HOST environment variable.');
   process.exit(1);
 }
+
+export default {
+  prod,
+};
