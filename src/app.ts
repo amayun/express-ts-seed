@@ -6,8 +6,6 @@ import cookieParser from 'cookie-parser';
 import httpLogger from 'morgan';
 import sassMiddleware from 'node-sass-middleware';
 
-import './config/env';
-
 import router from './router';
 import errorHandler from './middlewares/errorHandler';
 

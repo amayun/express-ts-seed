@@ -1,12 +1,19 @@
 #!/usr/bin/env ts-node
 
+import http from 'http';
+import '../src/config/env';
 import { initDb } from '../src/database';
 import app from '../src/app';
 import logger from '../src/util/logger';
-import http from 'http';
 
 async function start() {
-  await initDb();
+  try {
+    await initDb();
+  } catch (e) {
+    logger.error('Can not connect to database.', e);
+    process.exit(1);
+  }
+
   /**
    * Get port from environment and store in Express.
    */
@@ -56,7 +63,7 @@ async function start() {
   function onListening() {
     const addr = server.address();
     const bind =
-      typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr!.port;
+      typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port;
     logger.debug('Listening on ' + bind);
   }
 }
