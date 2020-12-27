@@ -9,6 +9,7 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noUnusedLocals": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "importHelpers": true,
     "skipLibCheck": true,

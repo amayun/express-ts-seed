@@ -1,7 +1,8 @@
 import winston from 'winston';
+import pack from '../../package.json';
 
 const options: winston.LoggerOptions = {
-  defaultMeta: { service: 'your-service-name' },
+  defaultMeta: { service: pack.name },
   transports: [
     new winston.transports.Console({
       level: process.env.NODE_ENV === 'production' ? 'error' : 'debug',
