@@ -1,12 +1,12 @@
 #!/usr/bin/env ts-node
 
-import getApp from '../src/app';
+import { initDb } from '../src/database';
+import app from '../src/app';
 import logger from '../src/util/logger';
 import http from 'http';
 
 async function start() {
-  const app = await getApp();
-
+  await initDb();
   /**
    * Get port from environment and store in Express.
    */
