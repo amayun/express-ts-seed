@@ -1,6 +1,17 @@
 import dotenv from 'dotenv';
 import fs from 'fs';
 import logger from '../util/logger';
+import schema from './schema';
+
+export type EnvConfig = {
+  DB_HOST: string;
+  DB_PORT: string;
+  DB_NAME: string;
+  DB_USER: string;
+  DB_PASSWORD: string;
+  NODE_ENV: string;
+  PORT: string;
+};
 
 if (fs.existsSync('.env')) {
   logger.debug('Using .env file to supply config environment variables');
@@ -10,16 +21,6 @@ if (fs.existsSync('.env')) {
   dotenv.config({ path: '.env.dev' });
 }
 
-export const ENVIRONMENT = process.env.NODE_ENV;
-const prod = ENVIRONMENT === 'production'; // Anything else is treated as 'dev'
+schema.validateSync(process.env);
 
-const { DB_HOST } = process.env;
-
-if (!DB_HOST) {
-  logger.error('No database host specified. Set DB_HOST environment variable.');
-  process.exit(1);
-}
-
-export default {
-  prod,
-};
+export default (process.env as unknown) as EnvConfig;
