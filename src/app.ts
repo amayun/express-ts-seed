@@ -1,7 +1,6 @@
 import 'express-async-errors';
 import createError from 'http-errors';
 import express from 'express';
-import path from 'path';
 import cookieParser from 'cookie-parser';
 import httpLogger from 'morgan';
 import sassMiddleware from 'node-sass-middleware';
@@ -12,7 +11,7 @@ import errorHandler from './middlewares/errorHandler';
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', 'views');
 app.set('view engine', 'pug');
 
 app.use(httpLogger('dev'));
@@ -21,13 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   sassMiddleware({
-    src: path.join(__dirname, 'public'),
-    dest: path.join(__dirname, 'public'),
+    src: 'public',
+    dest: 'public',
     indentedSyntax: true, // true = .sass and false = .scss
     sourceMap: true,
   }),
 );
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 router(app);
 
